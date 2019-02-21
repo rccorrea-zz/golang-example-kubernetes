@@ -11,9 +11,15 @@ var counter = 0
 var lastWords []string
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	counter++
 	hostname, _ := os.Hostname()
 	lastWord := r.URL.Path[1:]
+
+	if lastWord == "favicon.ico" {
+		fmt.Fprintf(w, "Request: %v\nHostname: %v\nWords:%v", counter, hostname, lastWords)
+		return
+	}
+
+	counter++
 
 	if lastWord == "clear" {
 		lastWords = []string{}
