@@ -23,11 +23,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	if lastWord == "clear" {
 		lastWords = []string{}
+	} else if lastWord == "exit" {
+		os.Exit(1)
 	} else if lastWord != "" {
 		lastWords = append(lastWords, lastWord)
 	}
 
-	fmt.Fprintf(w, "Request: %v\nHostname: %v\nWords:%v", counter, hostname, lastWords)
+	fmt.Fprintf(w, "Request: %v\nHostname: %v\nVersion: 2\nWords:%v", counter, hostname, lastWords)
 }
 
 func main() {
